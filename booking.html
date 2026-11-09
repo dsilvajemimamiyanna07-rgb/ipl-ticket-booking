@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IPL 2026 - Ticket Booking</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+    <header>
+        <h2>IPL 2026</h2>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="booking.html">Book Ticket</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Ticket Booking Form</h2>
+        <form>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required minlength="3" maxlength="50">
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" placeholder="9876543210" pattern="[0-9]{10}" required title="Please enter a valid 10-digit phone number">
+
+            <label for="match">Select Match:</label>
+            <select id="match" name="match" required>
+                <option value="">-- Choose a Match --</option>
+                <option value="rcb-csk">Match 01: RCB vs CSK</option>
+                <option value="mi-kkr">Match 02: MI vs KKR</option>
+            </select>
+
+            <label for="category">Stand Category:</label>
+            <select id="category" name="category" required>
+                <option value="">-- Choose Category --</option>
+                <option value="general">General (₹1000)</option>
+                <option value="vip">VIP (₹3000)</option>
+                <option value="premium">Pavilion / Premium (₹7500)</option>
+            </select>
+
+            <label for="tickets">Number of Tickets (Max 5):</label>
+            <input type="number" id="tickets" name="tickets" min="1" max="5" value="1" required>
+
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+                <label><input type="checkbox" required> I agree to the terms and conditions</label>
+            </div>
+
+            <button type="submit" style="background-color: #e94560; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Submit & Book</button>
+            <button type="reset" style="background-color: #555; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-left: 10px;">Reset</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 IPL Ticket Booking System</p>
+    </footer>
+
+</body>
+</html>
