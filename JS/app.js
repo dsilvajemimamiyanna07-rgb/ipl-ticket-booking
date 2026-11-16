@@ -3,14 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // 1. Reusable showToast function for notifications
     window.showToast = function(message) {
-        // Create toast element dynamically if it doesn't exist
         let toast = document.getElementById("toast-notification");
         if (!toast) {
             toast = document.createElement("div");
             toast.id = "toast-notification";
             document.body.appendChild(toast);
             
-            // Style the toast container
             toast.style.position = "fixed";
             toast.style.bottom = "20px";
             toast.style.right = "20px";
@@ -26,26 +24,62 @@ document.addEventListener("DOMContentLoaded", () => {
         toast.textContent = message;
         toast.style.opacity = "1";
 
-        // Hide toast after 3 seconds
         setTimeout(() => {
             toast.style.opacity = "0";
         }, 3000);
     };
 
-    // 2. Add smooth scrolling functionality for Book / Schedule buttons
-    const bookButtons = document.querySelectorAll("a[href^='#'], button");
-    bookButtons.forEach(button => {
-        button.addEventListener("click", (e) => {
-            const targetId = button.getAttribute("href");
+    // 2. Add smooth scrolling functionality for links/buttons
+    const interactiveButtons = document.querySelectorAll("a[href^='#'], button");
+    interactiveButtons.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const targetId = btn.getAttribute("href");
             if (targetId && targetId.startsWith("#") && targetId.length > 1) {
                 e.preventDefault();
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: "smooth" });
-                    showToast("Scrolled to section successfully!");
+                    showToast("Navigated successfully!");
                 }
             }
         });
     });
 
+    // 3. Activity 7: Live Booking Summary Calculation & DOM Selectors
+    const matchSelect = document.getElementById("match");
+    const categorySelect = document.getElementById("category");
+    const ticketsInput = document.getElementById("tickets");
+
+    const summaryMatch = document.getElementById("summaryMatch");
+    const summaryStand = document.getElementById("summaryStand");
+    const summaryQty = document.getElementById("summaryQty");
+    const summaryTotal = document.getElementById("summaryTotal");
+
+    function updateBookingSummary() {
+        if (!matchSelect || !categorySelect || !ticketsInput) return;
+
+        const selectedMatch = matchSelect.value;
+        const selectedOption = categorySelect.options[categorySelect.selectedIndex];
+        const standName = selectedOption.value;
+        const pricePerTicket = parseInt(selectedOption.getAttribute("data-price")) || 0;
+        const quantity = parseInt(ticketsInput.value) || 1;
+
+        const totalPrice = pricePerTicket * quantity;
+
+        // Update the Booking Summary Card live
+        if (summaryMatch) summaryMatch.textContent = selectedMatch;
+        if (summaryStand) summaryStand.textContent = standName;
+        if (summaryQty) summaryQty.textContent = quantity;
+        if (summaryTotal) summaryTotal.textContent = totalPrice;
+
+        // Confirm update with toast notification
+        showToast("Booking Summary updated!");
+    }
+
+    // Attach 'change' event listeners to form controls
+    if (matchSelect && categorySelect && ticketsInput) {
+        matchSelect.addEventListener("change", updateBookingSummary);
+        categorySelect.addEventListener("change", updateBookingSummary);
+        ticketsInput.addEventListener("change", updateBookingSummary);
+    }
 });
