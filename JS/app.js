@@ -45,7 +45,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 3. Activity 7: Live Booking Summary Calculation & DOM Selectors
+    // 3. Activity 8: Mobile Hamburger Menu Toggle
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const navMenu = document.getElementById("navMenu");
+
+    if (hamburgerBtn && navMenu) {
+        hamburgerBtn.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
+            showToast("Navigation menu toggled!");
+        });
+    }
+
+    // 4. Activity 7: Live Booking Summary Calculation & DOM Selectors
     const matchSelect = document.getElementById("match");
     const categorySelect = document.getElementById("category");
     const ticketsInput = document.getElementById("tickets");
