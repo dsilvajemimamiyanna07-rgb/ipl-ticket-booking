@@ -1,4 +1,3 @@
-// Wait for the DOM content to fully load
 document.addEventListener("DOMContentLoaded", () => {
     
     // 1. Reusable showToast function for notifications
@@ -29,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3000);
     };
 
-    // 2. Add smooth scrolling functionality for links/buttons
-    const interactiveButtons = document.querySelectorAll("a[href^='#'], button");
+    // 2. Smooth scrolling functionality
+    const interactiveButtons = document.querySelectorAll("a[href^='#']");
     interactiveButtons.forEach(btn => {
         btn.addEventListener("click", (e) => {
             const targetId = btn.getAttribute("href");
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 3. Activity 8: Mobile Hamburger Menu Toggle
+    // 3. Mobile Hamburger Menu Toggle
     const hamburgerBtn = document.getElementById("hamburgerBtn");
     const navMenu = document.getElementById("navMenu");
 
@@ -56,7 +55,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 4. Activity 7: Live Booking Summary Calculation & DOM Selectors
+    // 4. Team Filter for Match Table
+    const teamFilter = document.getElementById("teamFilter");
+    const matchRows = document.querySelectorAll("#matchTable tbody tr");
+
+    if (teamFilter) {
+        teamFilter.addEventListener("change", () => {
+            const selectedTeam = teamFilter.value;
+            matchRows.forEach(row => {
+                const rowTeams = row.getAttribute("data-teams") || "";
+                if (selectedTeam === "all" || rowTeams.includes(selectedTeam)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+            showToast(`Filtered by: ${selectedTeam.toUpperCase()}`);
+        });
+    }
+
+    // 5. Live Booking Summary Calculation
     const matchSelect = document.getElementById("match");
     const categorySelect = document.getElementById("category");
     const ticketsInput = document.getElementById("tickets");
@@ -77,20 +95,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const totalPrice = pricePerTicket * quantity;
 
-        // Update the Booking Summary Card live
         if (summaryMatch) summaryMatch.textContent = selectedMatch;
         if (summaryStand) summaryStand.textContent = standName;
         if (summaryQty) summaryQty.textContent = quantity;
         if (summaryTotal) summaryTotal.textContent = totalPrice;
 
-        // Confirm update with toast notification
         showToast("Booking Summary updated!");
     }
 
-    // Attach 'change' event listeners to form controls
     if (matchSelect && categorySelect && ticketsInput) {
         matchSelect.addEventListener("change", updateBookingSummary);
         categorySelect.addEventListener("change", updateBookingSummary);
         ticketsInput.addEventListener("change", updateBookingSummary);
     }
+
+    // 6. Auto-select match when clicking "Book Ticket" in the table
+    const bookMatchBtns = document.querySelectorAll(".book-match-btn");
+    bookMatchBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const chosenMatch = btn.getAttribute("data-match");
+            if (matchSelect && chosenMatch) {
+                matchSelect.value = chosenMatch;
+                updateBookingSummary();
+            }
+        });
+    });
 });

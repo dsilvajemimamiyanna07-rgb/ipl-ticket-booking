@@ -27,10 +27,14 @@
             <option value="all">All Teams</option>
             <option value="rcb">RCB</option>
             <option value="csk">CSK</option>
+            <option value="mi">MI</option>
+            <option value="kkr">KKR</option>
+            <option value="gt">GT</option>
+            <option value="rr">RR</option>
         </select>
         <br><br>
 
-        <table border="1">
+        <table border="1" id="matchTable">
             <thead>
                 <tr>
                     <th>Match Number</th>
@@ -42,13 +46,37 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr data-teams="rcb csk">
                     <td>Match 01</td>
                     <td>RCB vs CSK</td>
                     <td>22 Mar 2026, 7:30 PM</td>
                     <td>Bengaluru</td>
                     <td>₹1000 / ₹3000 / ₹7500</td>
-                    <td><a href="#booking"><button>Book Ticket</button></a></td>
+                    <td><a href="#booking" class="book-match-btn" data-match="Match 01: RCB vs CSK"><button>Book Ticket</button></a></td>
+                </tr>
+                <tr data-teams="mi kkr">
+                    <td>Match 02</td>
+                    <td>MI vs KKR</td>
+                    <td>23 Mar 2026, 7:30 PM</td>
+                    <td>Mumbai</td>
+                    <td>₹1000 / ₹3000 / ₹7500</td>
+                    <td><a href="#booking" class="book-match-btn" data-match="Match 02: MI vs KKR"><button>Book Ticket</button></a></td>
+                </tr>
+                <tr data-teams="gt rr">
+                    <td>Match 03</td>
+                    <td>GT vs RR</td>
+                    <td>24 Mar 2026, 7:30 PM</td>
+                    <td>Ahmedabad</td>
+                    <td>₹1000 / ₹3000 / ₹7500</td>
+                    <td><a href="#booking" class="book-match-btn" data-match="Match 03: GT vs RR"><button>Book Ticket</button></a></td>
+                </tr>
+                <tr data-teams="rcb mi">
+                    <td>Match 04</td>
+                    <td>RCB vs MI</td>
+                    <td>25 Mar 2026, 7:30 PM</td>
+                    <td>Bengaluru</td>
+                    <td>₹1000 / ₹3000 / ₹7500</td>
+                    <td><a href="#booking" class="book-match-btn" data-match="Match 04: RCB vs MI"><button>Book Ticket</button></a></td>
                 </tr>
             </tbody>
         </table>
@@ -61,6 +89,9 @@
             <label for="match">Select Match:</label>
             <select id="match" name="match">
                 <option value="Match 01: RCB vs CSK">Match 01: RCB vs CSK</option>
+                <option value="Match 02: MI vs KKR">Match 02: MI vs KKR</option>
+                <option value="Match 03: GT vs RR">Match 03: GT vs RR</option>
+                <option value="Match 04: RCB vs MI">Match 04: RCB vs MI</option>
             </select>
 
             <label for="category">Stand Category:</label>

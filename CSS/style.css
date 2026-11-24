@@ -1,4 +1,3 @@
-/* Global Reset */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,12 +6,11 @@
 }
 
 body {
-    background-color: #f4f4f9;
+    background-color: #f4f4f9
     color: #333;
     line-height: 1.6;
 }
 
-/* Flexbox Navigation Bar */
 header {
     display: flex;
     justify-content: space-between;
@@ -57,7 +55,6 @@ section {
     margin: auto;
 }
 
-/* Tables and Form Elements */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -67,7 +64,7 @@ table {
 
 th, td {
     padding: 12px;
-    text-align: left;
+    text-align: center;
     border: 1px solid #ddd;
 }
 
@@ -85,7 +82,6 @@ form select, form input {
     border-radius: 4px;
 }
 
-/* CSS Grid for Guidelines Cards */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -108,7 +104,6 @@ footer {
     margin-top: 30px;
 }
 
-/* Responsive Media Query for Tablets and Phones */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
@@ -121,7 +116,6 @@ footer {
         right: 20px;
         top: 20px;
     }
-
     nav {
         display: none; /* Hidden until toggled via JS */
         flex-direction: column;
@@ -136,4 +130,5 @@ footer {
     .grid-container {
         grid-template-columns: 1fr; /* Stack into single column */
     }
+
 }
